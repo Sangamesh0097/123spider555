@@ -1,5 +1,10 @@
 package com.crm.Vtiger.Assets;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -18,7 +23,13 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
+import com.crm.Vtiger.GenericUtility.BaseClass;
 import com.crm.Vtiger.GenericUtility.DataBaseUtility;
 import com.crm.Vtiger.GenericUtility.ExcelUtility;
 import com.crm.Vtiger.GenericUtility.FileUtility;
@@ -30,84 +41,86 @@ import com.crm.Vtiger.ObjectRepository.AssetPage;
 import com.crm.Vtiger.ObjectRepository.CreateAssetPage;
 import com.crm.Vtiger.ObjectRepository.HomePage;
 import com.crm.Vtiger.ObjectRepository.LoginPage;
-
+import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class CreateAsstes  implements IConstants  {
+@Listeners(com.crm.Vtiger.GenericUtility.ItestListenerImtn.class)
+public class CreateAsstes  extends BaseClass implements IConstants  {
 
-	public static void main(String[] args) throws Throwable {
-
-
-		WebDriver driver=null;
-
-		FileUtility fLib = new FileUtility();
-		JavaUtility jLib = new JavaUtility();
-		WebDriverUtility wLib = new WebDriverUtility();
-		ExcelUtility eLib = new ExcelUtility();
-		DataBaseUtility dLib = new DataBaseUtility();
+	@Test(enabled =true )
+	public void main() throws Throwable {
 
 
-		//fetch data from property file
-		/*FileInputStream fileInputStream=new FileInputStream("./src/test/resources/CommunData.properties");
-		Properties properties = new Properties();
-		properties.load(fileInputStream);
-		String URL = properties.getProperty("url");
-		String BROWSER = properties.getProperty("browser");
-		String USERNAME = properties.getProperty("username");
-		String PASSWORD = properties.getProperty("password");*/
-		String URL = fLib.getPropertyKeyValue("url");
-		String BROWSER = fLib.getPropertyKeyValue("browser");
-		String USERNAME = fLib.getPropertyKeyValue("username");
-		String PASSWORD = fLib.getPropertyKeyValue("password");
-
-		//Execute chrome browser
-		if (BROWSER.equalsIgnoreCase(IConstants.browserNameForChrome)) {
-			driver=WebDriverManager.chromedriver().create();
-		}
-
-		//Execute firefox browser
-		else if (BROWSER.equalsIgnoreCase(IConstants.browserNameForFirefox)) {
-			driver=WebDriverManager.firefoxdriver().create();
-		}
-
-		//Execute MSEdge browser
-		else if (BROWSER.equalsIgnoreCase(IConstants.browserNameForEdge)) {
-			driver=WebDriverManager.edgedriver().create();
-		}
-
-		//Execute chrome browser
-		else {
-			driver=WebDriverManager.chromedriver().create();
-		}
-
-
-		//maximize the window
-		//driver.manage().window().maximize();
-		wLib.maximizeTheBrowser(driver);
-
-		//create implicitly wait for 10sec
-		wLib.waitTillPageGetsLoad(driver);
-
-		//create explicitly wait for 10sec
-		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
-
-
-		//Enter url of application 
-		driver.get(URL);
-
-		/*	//Enter username into username text field
-		driver.findElement(By.name("user_name")).sendKeys(USERNAME);
-
-		//Enter password into password text field
-		driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
-
-		//Click on Login button
-		driver.findElement(By.id("submitButton")).click();*/
-
-		//Enter user name,password and click on submit button
-		LoginPage login = new LoginPage(driver);
-		login.loginToApp(USERNAME, PASSWORD);
+//	/*	WebDriver driver=null;
+//
+//		FileUtility fLib = new FileUtility();
+//		JavaUtility jLib = new JavaUtility();
+//		WebDriverUtility wLib = new WebDriverUtility();
+//		ExcelUtility eLib = new ExcelUtility();
+//		DataBaseUtility dLib = new DataBaseUtility();
+//
+//
+//		//fetch data from property file
+//		/*FileInputStream fileInputStream=new FileInputStream("./src/test/resources/CommunData.properties");
+//		Properties properties = new Properties();
+//		properties.load(fileInputStream);
+//		String URL = properties.getProperty("url");
+//		String BROWSER = properties.getProperty("browser");
+//		String USERNAME = properties.getProperty("username");
+//		String PASSWORD = properties.getProperty("password");*/
+//		String URL = fLib.getPropertyKeyValue("url");
+//		String BROWSER = fLib.getPropertyKeyValue("browser");
+//		String USERNAME = fLib.getPropertyKeyValue("username");
+//		String PASSWORD = fLib.getPropertyKeyValue("password");
+//
+//		//Execute chrome browser
+//		if (BROWSER.equalsIgnoreCase(IConstants.browserNameForChrome)) {
+//			driver=WebDriverManager.chromedriver().create();
+//		}
+//
+//		//Execute firefox browser
+//		else if (BROWSER.equalsIgnoreCase(IConstants.browserNameForFirefox)) {
+//			driver=WebDriverManager.firefoxdriver().create();
+//		}
+//
+//		//Execute MSEdge browser
+//		else if (BROWSER.equalsIgnoreCase(IConstants.browserNameForEdge)) {
+//			driver=WebDriverManager.edgedriver().create();
+//		}
+//
+//		//Execute chrome browser
+//		else {
+//			driver=WebDriverManager.chromedriver().create();
+//		}
+//
+//
+//		//maximize the window
+//		//driver.manage().window().maximize();
+//		wLib.maximizeTheBrowser(driver);
+//
+//		//create implicitly wait for 10sec
+//		wLib.waitTillPageGetsLoad(driver);
+//
+//		//create explicitly wait for 10sec
+//		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//
+//		//Enter url of application 
+//		driver.get(URL);
+//
+//		/*	//Enter username into username text field
+//		driver.findElement(By.name("user_name")).sendKeys(USERNAME);
+//
+//		//Enter password into password text field
+//		driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
+//
+//		//Click on Login button
+//		driver.findElement(By.id("submitButton")).click();*/
+//
+//		//Enter user name,password and click on submit button
+//		LoginPage login = new LoginPage(driver);
+//		login.loginToApp(USERNAME, PASSWORD);
 
 		/*//create actions object for mouse operating perpose
 		Actions actions=new Actions(driver);
@@ -145,6 +158,7 @@ public class CreateAsstes  implements IConstants  {
 		String soldDate=eLib.getDataFromExcel("Vtiger", 1, 24);
 		String serviceDate=eLib.getDataFromExcel("Vtiger", 1, 25);
 		String dropdownvalue=eLib.getDataFromExcel("Invoice Dropdown", 2, 0);
+		
 
 		/*	//enter serial number
 		driver.findElement(By.xpath("//tr[4]//td[2]//input[@name='serialnumber']")).sendKeys(serialNumber);
@@ -281,13 +295,20 @@ public class CreateAsstes  implements IConstants  {
 		String actual=assetInfoPage.getCreatedAssetName().getText();
 
 		//verify Assets created or not
-		if (actual.contains(expected)) {
-			System.out.println("Assets page is verified and Assets is created");
-
-		}
-		else {
-			System.out.println("Assets page is verified and Assets is not created");
-		}
+//		if (actual.contains(expected)) {
+//			System.out.println("Assets page is verified and Assets is created");
+//
+//		}
+//		else {
+//			System.out.println("Assets page is verified and Assets is not created");
+//		}
+		
+		//soft assert usage
+		SoftAssert asert = new SoftAssert();
+		//Assert.assertEquals(actual, expected,"hi dudes");
+		
+		asert.assertTrue(actual.contains(expected));
+		Reporter.log("Assets page is verified and Assets is created",true);
 
 		/*	//click on administrater
 		driver.findElement(By.xpath("//td[contains(@onmouseover,'admin123@gmail.com')]")).click();
@@ -296,8 +317,8 @@ public class CreateAsstes  implements IConstants  {
 		driver.findElement(By.xpath("//a[.='Sign Out']")).click();*/
 
 		//mouse over on administrator click on sign out
-		homePage.logOut(driver);
-		driver.quit();
+		//homePage.logOut(driver);
+		//driver.quit();
 
 	}
 

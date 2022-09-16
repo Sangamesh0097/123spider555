@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="none" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="com.crm.Vtiger.GenericUtility.ListnerScreenShot"/>
+  </listeners>
+  <test parallel="none" name="Test(failed)">
+    <groups>
+      <run>
+        <include name="smokeTesting"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.crm.Vtiger.Compaigns.CreatingCompaignsAddProductIntoCompaignstTest">
+        <methods>
+          <include name="main"/>
+        </methods>
+      </class> <!-- com.crm.Vtiger.Compaigns.CreatingCompaignsAddProductIntoCompaignstTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

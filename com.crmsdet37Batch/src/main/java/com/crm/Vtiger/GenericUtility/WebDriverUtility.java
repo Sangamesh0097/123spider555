@@ -259,9 +259,10 @@ public class WebDriverUtility {
 	 * Take webpage screenshot
 	 * @param driver
 	 * @param ScreenShotName
+	 * @return 
 	 */
 
-	public void takeScreenshot(WebDriver driver,String ScreenShotName)
+	public static String takeScreenshot(WebDriver driver,String ScreenShotName)
 	{
 		LocalDateTime localDT = LocalDateTime.now();
 		String timeStamp = localDT.toString().replace(':', '-');
@@ -274,6 +275,7 @@ public class WebDriverUtility {
 
 			e.printStackTrace();
 		}
+		return ScreenShotName;
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.crm.Vtiger.Email;
 
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -17,7 +18,10 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
+import com.crm.Vtiger.GenericUtility.BaseClass;
 import com.crm.Vtiger.GenericUtility.DataBaseUtility;
 import com.crm.Vtiger.GenericUtility.ExcelUtility;
 import com.crm.Vtiger.GenericUtility.FileUtility;
@@ -29,12 +33,17 @@ import com.crm.Vtiger.ObjectRepository.HomePage;
 import com.crm.Vtiger.ObjectRepository.LoginPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import test.thread.ThreadPoolSizeBase;
+import test.thread.ThreadPoolSizeTest;
+@Listeners(com.crm.Vtiger.GenericUtility.ItestListenerImtn.class)
 
-public class ComposeAMailAndSendTest {
-	public static void main(String[] args) throws Throwable {
+public class ComposeAMailAndSendTest extends BaseClass{
+	
+	@Test(invocationCount = 2 ,threadPoolSize = 2)
+	public  void test() throws Throwable {
 
 
-		WebDriver driver=null;
+	/*	WebDriver driver=null;
 
 
 		FileUtility fLib = new FileUtility();
@@ -47,12 +56,12 @@ public class ComposeAMailAndSendTest {
 		String URL = fLib.getPropertyKeyValue("url");
 		String BROWSER = fLib.getPropertyKeyValue("browser");
 		String USERNAME = fLib.getPropertyKeyValue("username");
-		String PASSWORD = fLib.getPropertyKeyValue("password");
+		String PASSWORD = fLib.getPropertyKeyValue("password");*/
 
 		//creating random number perpuse   
 		int random = jLib.getRandomNum();
 
-		//Execute chrome browser
+	/*	//Execute chrome browser
 		if (BROWSER.equalsIgnoreCase(IConstants.browserNameForChrome)) {
 			driver=WebDriverManager.chromedriver().create();
 		}
@@ -82,7 +91,7 @@ public class ComposeAMailAndSendTest {
 		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		//Enter url of application 
-		driver.get(URL);
+		driver.get(URL);*/
 
 		//Fetch First name from Excel		
 		String bccMailId = eLib.getDataFromExcel("Vtiger", 1, 17);
@@ -92,9 +101,9 @@ public class ComposeAMailAndSendTest {
 		String mailId = eLib.getDataFromExcel("Vtiger", 1, 27);
 		String vendorsName = eLib.getDataFromExcel("Vtiger", 1, 6);
 
-		//enter username ,password and click on submit button
+	/*	//enter username ,password and click on submit button
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.loginToApp(USERNAME, PASSWORD);
+		loginPage.loginToApp(USERNAME, PASSWORD);*/
 
 		//Click on click on email link	
 		HomePage homePage = new HomePage(driver);
@@ -110,16 +119,16 @@ public class ComposeAMailAndSendTest {
 		//select dropdown options
 		composeMailPage.selectDropdown("Vendors");
 		
-		//select Tomail
+		//select To mail
 		composeMailPage.selectMail(mailId, "email", driver, vendorsName);
 
 		System.out.println("Documents is emailed ");
 
-		//mouse over on administration and click on save button
+	/*	//mouse over on administration and click on save button
 		homePage.logOut(driver);
 
 		//terminate sission
-		driver.quit();
+		driver.quit();*/
 
 
 	}

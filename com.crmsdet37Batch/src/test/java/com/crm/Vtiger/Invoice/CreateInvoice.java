@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
 import com.crm.Vtiger.GenericUtility.DataBaseUtility;
 import com.crm.Vtiger.GenericUtility.ExcelUtility;
@@ -34,7 +35,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CreateInvoice {
 
-	public static void main(String[] args) throws Throwable {
+	
+	@Test(groups="smoketesting")
+	
+	public  void main() throws Throwable {
 		// TODO Auto-generated method stub
 
 		WebDriver driver=null;

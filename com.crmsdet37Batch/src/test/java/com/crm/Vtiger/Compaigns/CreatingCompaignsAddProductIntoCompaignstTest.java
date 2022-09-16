@@ -1,6 +1,7 @@
 package com.crm.Vtiger.Compaigns;
 
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -15,7 +16,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
+import com.crm.Vtiger.GenericUtility.BaseClass;
 import com.crm.Vtiger.GenericUtility.DataBaseUtility;
 import com.crm.Vtiger.GenericUtility.ExcelUtility;
 import com.crm.Vtiger.GenericUtility.FileUtility;
@@ -27,9 +31,14 @@ import com.crm.Vtiger.ObjectRepository.LoginPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class CreatingCompaignsAddProductIntoCompaignstTest {
+@Listeners(com.crm.Vtiger.GenericUtility.ItestListenerImtn.class)
 
-	public static void main(String[] args) throws Throwable {
+
+public class CreatingCompaignsAddProductIntoCompaignstTest extends BaseClass {
+
+	
+	@Test(groups = "smokeTesting")
+	public static void test() throws Throwable {
 		// TODO Auto-generated method stub
 
 		WebDriver driver=null;

@@ -127,7 +127,7 @@ public class CreatingDocumentsTest {
 
 
 		//terminate the section
-		driver.quit();		 
+	//	driver.quit();		 
 
 	}
 }

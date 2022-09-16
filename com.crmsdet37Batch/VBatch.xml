@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" preserve-order="true">
+<listeners>
+<listener class-name ="com.crm.Vtiger.GenericUtility.ItestListenerImtn"></listener>
+</listeners>
+  <test thread-count="5" name="Test">
+  <groups>
+  <run>
+  <include name="smokeTesting"/>
+  </run>
+  </groups>
+    <classes>
+      <class name="com.crm.Vtiger.Compaigns.CreatingCompaignsAddProductIntoCompaignstTest"/>
+      <class name="com.crm.Vtiger.Assets.CreateAsstes"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

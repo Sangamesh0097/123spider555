@@ -18,6 +18,9 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.asserts.SoftAssert;
 
 import com.crm.Vtiger.GenericUtility.DataBaseUtility;
 import com.crm.Vtiger.GenericUtility.ExcelUtility;
@@ -139,13 +142,16 @@ public class CreateContacsUsingNameKarthikTest {
 		String actual = contactInfoPage.getCreatedContactName().getText();
 
 		//Verifing Contact created or not
-		if (actual.contains(expected)) {
-			System.out.println("Contact page is verified and Contact is created ");
-
-		}
-		else {
-			System.out.println("Contact page is verified and Contact is not created ");
-		}
+//		if (actual.contains(expected)) {
+//			System.out.println("Contact page is verified and Contact is created ");
+//
+//		}
+//		else {
+//			System.out.println("Contact page is verified and Contact is not created ");
+//		}
+		 SoftAssert asert = new SoftAssert();
+		asert.assertTrue(actual.contains(expected));
+		 Reporter.log("Contact page is verified and Contact is created ",true);
 
 		//mouse on administrater and click on SignOut link
 		homePage.logOut(driver);
